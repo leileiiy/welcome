@@ -21,16 +21,19 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;min-height:100%;font-family:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-weight:500;color:var(--ink);background:var(--bg1)}
-main{max-width:1100px;margin:0 auto;padding:64px 32px 90px}
-header{text-align:center;margin-bottom:72px}
-header::before{content:"\2726\00a0\00a0\00a0\2726\00a0\00a0\00a0\2726";display:block;font-size:14px;margin-bottom:30px}
+main{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;min-height:560px;height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));padding:clamp(16px,3.5vh,40px) clamp(16px,3vw,40px) clamp(20px,4vh,44px)}
+header{flex:none;text-align:center;margin-bottom:clamp(14px,3vh,36px)}
+header::before{content:"\2726\00a0\00a0\00a0\2726\00a0\00a0\00a0\2726";display:block;font-size:14px;margin-bottom:clamp(8px,2vh,22px)}
 header h1::after{content:none}
-h1{font-weight:800;font-size:clamp(46px,8vw,96px);margin:0;letter-spacing:-.04em;line-height:.9}
-.org{font-size:clamp(20px,2.8vw,32px);font-weight:500;letter-spacing:-.015em;margin-top:14px}
-header p{display:inline-block;margin:32px 0 0;background:var(--ink);color:var(--bg1);padding:7px 12px;border-radius:3px;font-family:"DM Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 36px}
-@media (max-width:640px){.grid{grid-template-columns:1fr}}
-.tile{all:unset;box-sizing:border-box;position:relative;display:block;cursor:pointer;background:var(--tint,var(--paper));border:1.5px solid var(--ink);border-radius:18px;aspect-ratio:4/3;min-height:230px;box-shadow:0 18px 26px -16px rgba(23,66,54,.55);transform:rotate(var(--r,0deg));animation:sway 7s ease-in-out infinite}
+h1{font-weight:800;font-size:clamp(36px,min(8vw,10vh),88px);margin:0;letter-spacing:-.04em;line-height:.9}
+.org{font-size:clamp(18px,min(2.8vw,3.4vh),30px);font-weight:500;letter-spacing:-.015em;margin-top:10px}
+.foot{flex:none;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 18px;margin-top:clamp(10px,2.2vh,24px);font-family:"DM Mono",ui-monospace,monospace;font-size:clamp(12px,1.5vw,15px);letter-spacing:.03em}
+.foot a{color:var(--ink);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;padding:8px 2px}
+.foot span{opacity:.6}
+header p{display:inline-block;margin:clamp(10px,2.2vh,24px) 0 0;background:var(--ink);color:var(--bg1);padding:7px 12px;border-radius:3px;font-family:"DM Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(0,1fr);gap:clamp(14px,2.6vh,32px) clamp(14px,2.4vw,32px)}
+@media (max-width:640px){.grid{grid-template-columns:1fr;grid-auto-rows:minmax(150px,auto)}main{height:auto}}
+.tile{all:unset;box-sizing:border-box;position:relative;display:block;cursor:pointer;background:var(--tint,var(--paper));border:1.5px solid var(--ink);border-radius:18px;min-height:0;container-type:inline-size;box-shadow:0 18px 26px -16px rgba(23,66,54,.55);transform:rotate(var(--r,0deg));animation:sway 7s ease-in-out infinite}
 
 
 .tile:active{filter:brightness(.97)}
@@ -38,7 +41,7 @@ header p{display:inline-block;margin:32px 0 0;background:var(--ink);color:var(--
 .tile.swing{animation:swing .4s ease-out forwards}
 .tile:nth-child(1){--tint:var(--t1)}.tile:nth-child(2){--tint:var(--t2)}.tile:nth-child(3){--tint:var(--t3)}.tile:nth-child(4){--tint:var(--t4)}
 .tile:focus-visible{outline:3px solid var(--accent)}
-.pc{position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:22px 24px}
+.pc{position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(12px,2.4vh,22px) clamp(14px,1.8vw,24px)}
 .pc-top{display:flex;justify-content:space-between;align-items:flex-start}
 .eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;opacity:.75}
 .stamp{position:relative;width:58px;height:68px;border:1.5px dashed var(--rule);display:grid;place-items:center}
@@ -48,11 +51,11 @@ header p{display:inline-block;margin:32px 0 0;background:var(--ink);color:var(--
 .pc-foot .rule{flex:1;height:1px;background:var(--rule)}
 .tag{background:var(--ink);color:var(--paper);padding:7px 11px;border-radius:3px;font-family:"DM Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
 .arrow{width:38px;height:38px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:18px;line-height:1}
-.glyph{position:absolute;right:9%;top:46%;width:32%;transform:translateY(-50%);color:var(--ink)}
-.glyph svg{display:block;width:100%;height:auto}
+.glyph{position:absolute;right:9%;top:54%;height:50%;aspect-ratio:1;transform:translateY(-50%);color:var(--ink)}
+.glyph svg{display:block;width:100%;height:100%}
 
 
-.tile h2{margin:0;max-width:66%;font-weight:800;font-size:clamp(30px,4vw,50px);line-height:.95;letter-spacing:-.03em}
+.tile h2{margin:0;max-width:66%;font-weight:800;font-size:clamp(20px,9cqw,50px);line-height:.95;letter-spacing:-.03em}
 .tile span.sub{color:var(--muted);font-size:clamp(16px,2vw,20px)}
 .tile .go{display:inline-block;background:var(--ink);color:var(--paper);padding:8px 12px;border-radius:3px;font-family:"DM Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
 .overlay{position:fixed;inset:0;background:rgba(10,22,16,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px;z-index:20}
@@ -60,7 +63,7 @@ header p{display:inline-block;margin:32px 0 0;background:var(--ink);color:var(--
 .sheet{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:40px 36px;width:min(520px,100%);max-height:100%;overflow:auto;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.35)}
 .sheet h3{margin:0 0 10px;font-weight:800;font-size:36px;line-height:1;letter-spacing:-.03em}
 .sheet p{margin:0 0 24px;color:var(--muted);font-family:"DM Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:400}
-.qr{background:#fff;border-radius:4px;border:1px solid var(--rule);padding:18px;width:min(320px,70vw);margin:0 auto 22px}
+.qr{background:#fff;border-radius:4px;border:1px solid var(--rule);padding:18px;width:min(320px,70vw,36vh);margin:0 auto 22px}
 .qr svg{display:block;width:100%;height:auto}
 .btn{display:block;width:100%;padding:18px;border-radius:3px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;text-decoration:none;text-align:center;border:0;cursor:pointer;font-family:"DM Mono",ui-monospace,monospace}
 .btn.primary{background:var(--ink);color:var(--paper)}
@@ -89,6 +92,11 @@ header p{display:inline-block;margin:32px 0 0;background:var(--ink);color:var(--
     <p id="subheading">Tap an option below to get started</p>
   </header>
   <section class="grid" id="grid" aria-label="Quick links"></section>
+  <footer class="foot">
+    <a href="https://aopsacademy.org/campus/sanmateo" target="_blank" rel="noopener">aopsacademy.org/campus/sanmateo</a>
+    <span aria-hidden="true">✦</span>
+    <a href="mailto:sanmateo@aopsacademy.org">sanmateo@aopsacademy.org</a>
+  </footer>
 </main>
 
 <button class="edit-btn" id="editBtn">⚙︎ Edit</button>
