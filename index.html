@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Welcome Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#f6f3ec;--card:#ffffff;--text:#14241c;--muted:#5d6b63;
+  --accent:#1e4d3a;--accent2:#c9a45c;--soft:#e4eee8;--btn:#1e4d3a;--btnText:#ffffff;--line:#e6e1d4;--shadow:0 8px 24px rgba(30,77,58,.08);
+  --edge:#174236;--ink:#174236;--rule:rgba(23,66,54,.28);--clip:#174236;--clip2:#8fa39a;--paper:#fffdf6;--bg1:#f9f5ea;--t1:#dcd3f5;--t2:#f9c9ee;--t3:#f8dfa6;--t4:#cfe6d6;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root.dark-mode-off{--edge:#4c8a6c;--ink:#eef2ee;--rule:rgba(238,242,238,.3);--clip:#c9d1cc;--clip2:#7d8a83;--paper:#17211c;--t1:#22352a;--t2:#37321f;--t3:#3a2c25;--t4:#2a2b3b;--bg1:#0e1411;--card:#16271f;--text:#f1f5f2;--muted:#9db0a5;--accent:#7fc4a0;--accent2:#d9b56a;--soft:#22392e;--btn:#7fc4a0;--btnText:#0e1a14;--line:#243a2f;--shadow:0 8px 24px rgba(0,0,0,.35)}
+}
+:root[data-theme="dark"]{--edge:#4c8a6c;--ink:#eef2ee;--rule:rgba(238,242,238,.3);--clip:#c9d1cc;--clip2:#7d8a83;--paper:#17211c;--t1:#22352a;--t2:#37321f;--t3:#3a2c25;--t4:#2a2b3b;--bg1:#0e1411;--card:#16271f;--text:#f1f5f2;--muted:#9db0a5;--accent:#7fc4a0;--accent2:#d9b56a;--soft:#22392e;--btn:#7fc4a0;--btnText:#0e1a14;--line:#243a2f;--shadow:0 8px 24px rgba(0,0,0,.35)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;font-family:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-weight:500;color:var(--ink);background:var(--bg1)}
+main{max-width:1100px;margin:0 auto;padding:64px 32px 90px}
+header{text-align:center;margin-bottom:72px}
+header::before{content:"\2726\00a0\00a0\00a0\2726\00a0\00a0\00a0\2726";display:block;font-size:14px;margin-bottom:30px}
+header h1::after{content:none}
+h1{font-weight:800;font-size:clamp(46px,8vw,96px);margin:0;letter-spacing:-.04em;line-height:.9}
+.org{font-size:clamp(20px,2.8vw,32px);font-weight:500;letter-spacing:-.015em;margin-top:14px}
+header p{display:inline-block;margin:32px 0 0;background:var(--ink);color:var(--bg1);padding:7px 12px;border-radius:3px;font-family:"DM Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 36px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.tile{all:unset;box-sizing:border-box;position:relative;display:block;cursor:pointer;background:var(--tint,var(--paper));border:1.5px solid var(--ink);border-radius:18px;aspect-ratio:4/3;min-height:230px;box-shadow:0 18px 26px -16px rgba(23,66,54,.55);transform:rotate(var(--r,0deg));animation:sway 7s ease-in-out infinite}
+
+
+.tile:active{filter:brightness(.97)}
+.tile:nth-child(1){--r:0deg;animation-delay:0s}.tile:nth-child(2){--r:0deg;animation-delay:-2s;animation-duration:8s}.tile:nth-child(3){--r:0deg;animation-delay:-4s;animation-duration:6.5s}.tile:nth-child(4){--r:0deg;animation-delay:-1s;animation-duration:7.5s}
+.tile.swing{animation:swing .4s ease-out forwards}
+.tile:nth-child(1){--tint:var(--t1)}.tile:nth-child(2){--tint:var(--t2)}.tile:nth-child(3){--tint:var(--t3)}.tile:nth-child(4){--tint:var(--t4)}
+.tile:focus-visible{outline:3px solid var(--accent)}
+.pc{position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:22px 24px}
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start}
+.eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;opacity:.75}
+.stamp{position:relative;width:58px;height:68px;border:1.5px dashed var(--rule);display:grid;place-items:center}
+.stamp svg{width:30px;height:30px}
+.stamp::after{content:"";position:absolute;width:84px;height:84px;left:-58px;top:-4px;border:1px solid var(--rule);border-radius:50%;outline:1px solid var(--rule);outline-offset:5px;pointer-events:none}
+.pc-foot{display:flex;align-items:center;gap:18px}
+.pc-foot .rule{flex:1;height:1px;background:var(--rule)}
+.tag{background:var(--ink);color:var(--paper);padding:7px 11px;border-radius:3px;font-family:"DM Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.arrow{width:38px;height:38px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:18px;line-height:1}
+.glyph{position:absolute;right:9%;top:46%;width:32%;transform:translateY(-50%);color:var(--ink)}
+.glyph svg{display:block;width:100%;height:auto}
+
+
+.tile h2{margin:0;max-width:66%;font-weight:800;font-size:clamp(30px,4vw,50px);line-height:.95;letter-spacing:-.03em}
+.tile span.sub{color:var(--muted);font-size:clamp(16px,2vw,20px)}
+.tile .go{display:inline-block;background:var(--ink);color:var(--paper);padding:8px 12px;border-radius:3px;font-family:"DM Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.overlay{position:fixed;inset:0;background:rgba(10,22,16,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px;z-index:20}
+.overlay.open{display:flex}
+.sheet{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:40px 36px;width:min(520px,100%);max-height:100%;overflow:auto;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.sheet h3{margin:0 0 10px;font-weight:800;font-size:36px;line-height:1;letter-spacing:-.03em}
+.sheet p{margin:0 0 24px;color:var(--muted);font-family:"DM Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:400}
+.qr{background:#fff;border-radius:4px;border:1px solid var(--rule);padding:18px;width:min(320px,70vw);margin:0 auto 22px}
+.qr svg{display:block;width:100%;height:auto}
+.btn{display:block;width:100%;padding:18px;border-radius:3px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;text-decoration:none;text-align:center;border:0;cursor:pointer;font-family:"DM Mono",ui-monospace,monospace}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--muted);margin-top:10px;font-size:11px}
+.url{word-break:break-all;color:var(--muted);font-size:14px;margin:10px 0 16px}
+.wifi{background:var(--bg1);border:1px solid var(--rule);border-radius:4px;padding:14px;margin-bottom:16px;font-size:18px;text-align:left}
+.wifi b{display:inline-block;min-width:96px;color:var(--muted);font-weight:500}
+.edit-btn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--card);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-size:14px;cursor:pointer;opacity:.6;font-family:inherit}
+.form{text-align:left}
+.form label{display:block;font-size:14px;color:var(--muted);margin:10px 0 4px}
+.form input{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--bg1);color:var(--text);font-size:16px;font-family:inherit}
+.form fieldset{border:1px solid var(--line);border-radius:16px;margin:14px 0;padding:6px 14px 14px}
+.form legend{font-weight:600;padding:0 6px}
+.overlay.open .sheet{animation:flip .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes sway{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-6px) rotate(var(--r,0deg))}}
+@keyframes swing{0%{transform:translateY(0) rotate(var(--r,0deg))}100%{transform:translateY(-14px) rotate(0deg) scale(1.04)}}
+@keyframes flip{from{transform:perspective(1400px) rotateY(-80deg);opacity:0}to{transform:perspective(1400px) rotateY(0);opacity:1}}
+@media (prefers-reduced-motion:reduce){.tile,.tile.swing,.overlay.open .sheet{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1 id="heading">WELCOME</h1>
+    <div class="org" id="org">AoPS Academy San Mateo</div>
+    <p id="subheading">Tap an option below to get started</p>
+  </header>
+  <section class="grid" id="grid" aria-label="Quick links"></section>
+</main>
+
+<button class="edit-btn" id="editBtn">⚙︎ Edit</button>
+
+<div class="overlay" id="viewer" role="dialog" aria-modal="true">
+  <div class="sheet" id="viewerSheet"></div>
+</div>
+<div class="overlay" id="editor" role="dialog" aria-modal="true">
+  <div class="sheet form" id="editorSheet"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+// ---- EDIT THESE DEFAULTS (or use the ⚙︎ Edit button on the page) ----
+var DEFAULTS = {
+  heading: "WELCOME",
+  org: "AoPS Academy San Mateo",
+  subheading: "Tap an option below to get started",
+  tiles: [
+    {kind:"wifi", icon:"📶", title:"Guest Wi‑Fi", sub:"Get online in seconds", ssid:"AoPSA Guest", pass:"!aopsguest!"},
+    {kind:"link", icon:"📅", title:"Book a Consultation", sub:"Pick a time that works for you", url:"https://events.aopsacademy.org/rsvp/sanmateo/admissions"},
+    {kind:"link", icon:"✅", title:"Sign Up for Self Release", sub:"Check yourself out", url:"https://docs.google.com/forms/d/e/1FAIpQLSdX69foCoCV2W7yMwHosu1mKP0gz1MHmJYf8UtFMXpo2qXasA/viewform"},
+    {kind:"link", icon:"⭐", title:"Love AoPS? Leave Us a Review", sub:"Tell us how we did", url:"https://g.page/r/CYlW0GVar-FeEBM/review?utm_source=gbp&utm_medium=reviews&utm_campaign=qr"}
+  ]
+};
+var KEY = "office-hub-v1";
+var data = load();
+function load(){
+  try{ var s = localStorage.getItem(KEY); if(s) return JSON.parse(s); }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULTS));
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){} }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]}); }
+function wifiEsc(s){ return String(s).replace(/([\\;,:"])/g,"\\$1"); }
+function qrSvg(text){
+  try{
+    var q = qrcode(0,"M"); q.addData(text); q.make();
+    return q.createSvgTag({cellSize:4, margin:0, scalable:true});
+  }catch(e){ return "<p>Couldn’t build the QR code.</p>"; }
+}
+
+var idleTimer;
+function resetIdle(){
+  clearTimeout(idleTimer);
+  if(document.getElementById("viewer").classList.contains("open")){
+    idleTimer = setTimeout(closeViewer, 60000); // auto-return to home after 60s
+  }
+}
+["touchstart","click"].forEach(function(ev){ document.addEventListener(ev, resetIdle, {passive:true}); });
+
+var GLYPHS=[
+  '<rect x="12" y="12" width="36" height="36"/><rect x="52" y="52" width="36" height="36"/>',
+  '<path d="M14 14h72L50 50z"/><path d="M50 50l36 36H14z"/>',
+  '<circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="14"/><circle cx="50" cy="50" r="10"/>',
+  '<path d="M50 6l11 33 33 11-33 11-11 33-11-33L6 50l33-11z"/>'
+];
+var SVGI={
+  wifi:'<path d="M2 9a15 15 0 0 1 20 0M5 12.5a10.5 10.5 0 0 1 14 0M8.5 16a5.5 5.5 0 0 1 7 0"/><circle cx="12" cy="19.5" r=".9" fill="currentColor"/>',
+  calendar:'<rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  check:'<circle cx="12" cy="12" r="9"/><path d="M7.8 12.4l3 3 5.4-6"/>',
+  star:'<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9l-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z"/>',
+  heart:'<path d="M12 20s-7.5-4.6-7.5-10A4.2 4.2 0 0 1 12 7.6 4.2 4.2 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/>',
+  mail:'<rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/>'
+};
+var ALIAS={"\uD83D\uDCF6":"wifi","\uD83D\uDCC5":"calendar","\u2705":"check","\u2B50":"star"};
+function iconHTML(k){
+  var key = SVGI[k] ? k : ALIAS[k];
+  if(!key) return '<span style="font-size:26px">'+esc(k)+'</span>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+SVGI[key]+'</svg>';
+}
+function render(){
+  document.getElementById("heading").textContent = data.heading;
+  document.getElementById("org").textContent = data.org || DEFAULTS.org;
+  document.getElementById("subheading").textContent = data.subheading;
+  var g = document.getElementById("grid"); g.innerHTML = "";
+  data.tiles.forEach(function(t,i){
+    var b = document.createElement("button");
+    b.className = "tile";
+    b.innerHTML = '<div class="pc"><div class="pc-top"><span class="tag">Tap to open</span><span class="arrow">&#8599;</span></div><div class="glyph"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">'+GLYPHS[i%GLYPHS.length]+'</svg></div><h2>'+esc(t.title)+'</h2></div>';
+    b.onclick = function(){ b.classList.add("swing"); setTimeout(function(){ b.classList.remove("swing"); openViewer(i); }, 380); };
+    g.appendChild(b);
+  });
+}
+
+function openViewer(i){
+  var t = data.tiles[i], html;
+  if(t.kind==="wifi"){
+    html = '<h3>'+esc(t.title)+'</h3><p>Connect to the network below</p>'
+      + '<div class="wifi" style="font-size:26px;line-height:1.9;padding:22px"><div><b>Network</b> '+esc(t.ssid)+'</div><div><b>Password</b> '+esc(t.pass)+'</div></div>'
+      + '<button class="btn ghost" id="closeBtn">← Back</button>';
+  } else {
+    html = '<h3>'+esc(t.title)+'</h3><p>Scan with your phone camera</p>'
+      + '<div class="qr">'+qrSvg(t.url)+'</div>'
+      + '<div class="url">'+esc(t.url)+'</div>'
+      + '<a class="btn primary" href="'+esc(t.url)+'" target="_blank" rel="noopener">Open on this iPad</a>'
+      + '<button class="btn ghost" id="closeBtn">← Back</button>';
+  }
+  document.getElementById("viewerSheet").innerHTML = html;
+  document.getElementById("closeBtn").onclick = closeViewer;
+  document.getElementById("viewer").classList.add("open");
+  resetIdle();
+}
+function closeViewer(){ document.getElementById("viewer").classList.remove("open"); clearTimeout(idleTimer); }
+document.getElementById("viewer").addEventListener("click", function(e){ if(e.target===this) closeViewer(); });
+
+function openEditor(){
+  var h = '<h3 style="text-align:center">Edit hub</h3>'
+    + '<label>Heading</label><input id="e_h" value="'+esc(data.heading)+'">'
+    + '<label>Organization line</label><input id="e_o" value="'+esc(data.org||DEFAULTS.org)+'">'
+    + '<label>Subheading</label><input id="e_s" value="'+esc(data.subheading)+'">';
+  data.tiles.forEach(function(t,i){
+    h += '<fieldset><legend>Tile '+(i+1)+'</legend>'
+      + '<label>Icon (wifi, calendar, check, star, heart or mail)</label><input data-i="'+i+'" data-f="icon" value="'+esc(t.icon)+'">'
+      + '<label>Title</label><input data-i="'+i+'" data-f="title" value="'+esc(t.title)+'">';
+    if(t.kind==="wifi"){
+      h += '<label>Wi‑Fi name</label><input data-i="'+i+'" data-f="ssid" value="'+esc(t.ssid)+'">'
+        + '<label>Wi‑Fi password</label><input data-i="'+i+'" data-f="pass" value="'+esc(t.pass)+'">';
+    } else {
+      h += '<label>Link (https://…)</label><input data-i="'+i+'" data-f="url" value="'+esc(t.url)+'">';
+    }
+    h += '</fieldset>';
+  });
+  h += '<button class="btn primary" id="saveBtn">Save</button>'
+    + '<button class="btn ghost" id="resetBtn">Reset to defaults</button>'
+    + '<button class="btn ghost" id="cancelBtn">Cancel</button>';
+  document.getElementById("editorSheet").innerHTML = h;
+  document.getElementById("editor").classList.add("open");
+  document.getElementById("saveBtn").onclick = function(){
+    data.heading = document.getElementById("e_h").value;
+    data.org = document.getElementById("e_o").value;
+    data.subheading = document.getElementById("e_s").value;
+    document.querySelectorAll("#editorSheet input[data-i]").forEach(function(inp){
+      data.tiles[+inp.dataset.i][inp.dataset.f] = inp.value.trim();
+    });
+    save(); render(); closeEditor();
+  };
+  document.getElementById("resetBtn").onclick = function(){
+    data = JSON.parse(JSON.stringify(DEFAULTS)); save(); render(); closeEditor();
+  };
+  document.getElementById("cancelBtn").onclick = closeEditor;
+}
+function closeEditor(){ document.getElementById("editor").classList.remove("open"); }
+document.getElementById("editBtn").onclick = openEditor;
+
+render();
+</script>
+</body>
+</html>
