@@ -68,6 +68,7 @@ header p{display:inline-block;margin:clamp(10px,2.2vh,24px) 0 0;background:var(-
 .btn{display:block;width:100%;padding:18px;border-radius:3px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;text-decoration:none;text-align:center;border:0;cursor:pointer;font-family:"DM Mono",ui-monospace,monospace}
 .btn.primary{background:var(--ink);color:var(--paper)}
 .btn.ghost{background:transparent;color:var(--muted);margin-top:10px;font-size:11px}
+.note{font-family:"DM Mono",ui-monospace,monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:-4px 0 14px}
 .url{word-break:break-all;color:var(--muted);font-size:14px;margin:10px 0 16px}
 .wifi{background:var(--bg1);border:1px solid var(--rule);border-radius:4px;padding:14px;margin-bottom:16px;font-size:18px;text-align:left}
 .wifi b{display:inline-block;min-width:96px;color:var(--muted);font-weight:500}
@@ -118,11 +119,11 @@ var DEFAULTS = {
   tiles: [
     {kind:"wifi", icon:"📶", title:"Guest Wi‑Fi", sub:"Get online in seconds", ssid:"AoPSA Guest", pass:"!aopsguest!"},
     {kind:"link", icon:"📅", title:"Book a Consultation", sub:"Pick a time that works for you", url:"https://events.aopsacademy.org/rsvp/sanmateo/admissions"},
-    {kind:"link", icon:"✅", title:"Sign Up for Self Release", sub:"Check yourself out", url:"https://docs.google.com/forms/d/e/1FAIpQLSdX69foCoCV2W7yMwHosu1mKP0gz1MHmJYf8UtFMXpo2qXasA/viewform"},
+    {kind:"link", icon:"✅", title:"Sign Up for Self Release", sub:"Check yourself out", note:"For students aged 12 and up", url:"https://docs.google.com/forms/d/e/1FAIpQLSdX69foCoCV2W7yMwHosu1mKP0gz1MHmJYf8UtFMXpo2qXasA/viewform"},
     {kind:"link", icon:"⭐", title:"Love AoPS? Leave Us a Review", sub:"Tell us how we did", url:"https://g.page/r/CYlW0GVar-FeEBM/review?utm_source=gbp&utm_medium=reviews&utm_campaign=qr"}
   ]
 };
-var KEY = "office-hub-v1";
+var KEY = "office-hub-v2"; // bumped so devices pick up the new note
 var data = load();
 function load(){
   try{ var s = localStorage.getItem(KEY); if(s) return JSON.parse(s); }catch(e){}
@@ -190,7 +191,7 @@ function openViewer(i){
   } else {
     html = '<h3>'+esc(t.title)+'</h3><p>Scan with your phone camera</p>'
       + '<div class="qr">'+qrSvg(t.url)+'</div>'
-      + '<div class="url">'+esc(t.url)+'</div>'
+      + (t.note ? '<div class="note">'+esc(t.note)+'</div>' : '')
       + '<a class="btn primary" href="'+esc(t.url)+'" target="_blank" rel="noopener">Open on this iPad</a>'
       + '<button class="btn ghost" id="closeBtn">← Back</button>';
   }
